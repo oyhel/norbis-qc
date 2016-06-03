@@ -1,0 +1,31 @@
+---
+title: "MDS 3D plot"
+author: "Øyvind Helgeland"
+date: "June 5, 2016"
+output: html_document
+---
+
+```{r}
+# Install rgl package to make 3D plotting available
+install.packages("rgl")
+```
+
+
+```{r}
+# Load library
+library(rgl)
+
+# Specify path to .mds file and the file containing population info
+mds <- read.table(file = '/home/oyvind/kurs-norbis-hapmap/practical/totalmds.mds', header = T)
+pops <- read.table(file = '/home/oyvind/kurs-norbis-hapmap/practical/relationships_w_pops_041510.txt', header = T)
+
+# merge mds with population info
+m <- merge(mds, pops, by=c('FID','IID'))
+
+palette(rainbow(length(levels(m$population))))
+
+plot3d(m$C1, m$C2, m$C3, col = as.numeric(m$population))
+legend3d("topright", legend = levels(m$population), pch = 16, col = levels(as.factor(as.numeric(m$population))), cex=1, inset=c(0.02))
+
+```
+
