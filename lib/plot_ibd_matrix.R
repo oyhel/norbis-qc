@@ -3,7 +3,7 @@
 args = commandArgs(trailingOnly=TRUE)
 genomefile <- args[1]
 
-d = read.table("/home/oyvind/kurs-norbis-hapmap/practical/CEUgenome.genome", header=T)
+d = read.table(genomefile, header=T)
 
 pdf(file='ibd_matrix.pdf')
 	par(pch=16)
